@@ -1,6 +1,6 @@
 import os
 import json
-from telegram import Update
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, ContextTypes
 
 DATA_FILE = "history.json"
