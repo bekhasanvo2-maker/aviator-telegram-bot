@@ -16,13 +16,23 @@ def save_data(data):
         json.dump(data, f)
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    keyboard = [[
+        InlineKeyboardButton(
+            "✈️ AVIATOR O‘YININI OCHISH",
+            url="https://db-bet-59066.pro/ru/my-casino?game=52358"
+        )
+    ]]
+
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
     await update.message.reply_text(
         "✈️ AVIATOR STATISTIKA BOT\n\n"
         "/add 1.25 — natija qo‘shish\n"
         "/stats — statistika\n"
         "/history — tarix\n"
         "/clear — tarixni tozalash\n\n"
-        "Eslatma: keyingi raundni aniq bashorat qilib bo‘lmaydi."
+        "Eslatma: keyingi raundni aniq bashorat qilib bo‘lmaydi.",
+        reply_markup=reply_markup
     )
 
 async def add(update: Update, context: ContextTypes.DEFAULT_TYPE):
