@@ -69,6 +69,32 @@ async def stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"2x va yuqori: {len(values)-low}\n\n"
         "Bu ma’lumotlar keyingi raundni bashorat qilmaydi."
     )
+async def predict(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    data = load_data()
+    values = data.get(str(update.effective_user.id), [])
+
+    if len(values) < 10:
+        await update.message.reply_text(
+            "📊 Tahlil uchun kamida 10 ta natija kerak.\n"
+            "Natijalarni /add 1.25 orqali kiriting."
+        )
+        return
+
+    recent = values[-50:]
+    avg = sum(recent) / len(recent)
+    low = sum(x < 2 for x in recent)
+    medium = sum(2 <= x < 5 for x in recent)
+    high = sum(x >= 5 for x in recent)
+
+    await update.message.reply_text(
+        "✈️ AVIATOR — STATISTIK TAHLIL\n\n"
+        f"Tahlil qilingan raundlar: {len(recent)}\n"
+        f"O‘rtacha koeffitsiyent: {avg:.2f}x\n\n"
+        f"1x–2x: {low} ta ({low / len(recent) * 100:.1f}%)\n"
+        f"2x–5x: {medium} ta ({medium / len(recent) * 100:.1f}%)\n"
+        f"5x va yuqori: {high} ta ({high / len(recent) * 100:.1f}%)\n\n"
+        "⚠️ Bu tarixiy statistika, keyingi raund bashorati emas."
+    )
 
 async def history(update: Update, context: ContextTypes.DEFAULT_TYPE):
     data = load_data()
