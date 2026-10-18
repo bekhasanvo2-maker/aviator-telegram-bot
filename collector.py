@@ -2,7 +2,7 @@ import json
 import os
 from datetime import datetime, timezone
 
-DATA_FILE = "history.json"
+DATA_FILE = "collector_results.json"
 
 
 def save_result(value):
