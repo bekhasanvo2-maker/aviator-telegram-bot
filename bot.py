@@ -1,3 +1,4 @@
+from dbbet_api import get_game_page
 import os
 import json
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
